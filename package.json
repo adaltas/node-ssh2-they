@@ -1,0 +1,23 @@
+{
+  "name": "ssh2-they",
+  "version": "0.0.0",
+  "description": "Extends Mocha with the function `they` to transparently run tests in local and ssh mode",
+  "keywords": ["ssh", "ssh2", "sftp", "secure", "test", "mocha"],
+  "homepage": "https://github.com/wdavidw/ssh2-they",
+  "author": "David Worms <david@adaltas.com>",
+  "contributors": [],
+  "engines": {
+    "node": ">=0.10.1"
+  },
+  "main": "./lib/index",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wdavidw/node-ssh2-they.git"
+  },
+  "dependencies": {
+    "connect": "latest"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "scripts": {}
+}
