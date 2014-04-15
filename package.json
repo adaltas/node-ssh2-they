@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "Extends Mocha with the function `they` to transparently run tests in local and ssh mode",
   "keywords": ["ssh", "ssh2", "sftp", "secure", "test", "mocha"],
-  "homepage": "https://github.com/wdavidw/ssh2-they",
+  "homepage": "https://github.com/wdavidw/node-ssh2-they",
   "author": "David Worms <david@adaltas.com>",
   "contributors": [],
   "engines": {
