@@ -17,7 +17,9 @@
   "dependencies": {
     "ssh2-connect": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "coffee-script": "latest"
+  },
   "optionalDependencies": {},
   "scripts": {}
 }
