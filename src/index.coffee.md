@@ -10,7 +10,11 @@ running both locally and remotely
       it "#{msg} (remote)", (next) ->
         connect host: 'localhost', (err, ssh) =>
           return next err if err
-          callback.call @, ssh, next
+          # callback.call @, ssh, next
+          callback.call @, ssh, (err) ->
+            ssh.end()
+            ssh.on 'end', ->
+              next err
     they.only = (mode, msg, callback) ->
       if arguments.length is 2
         callback = msg
@@ -22,7 +26,11 @@ running both locally and remotely
       remote = ->
         it.only "#{msg} (remote)", (next) ->
           connect host: 'localhost', (err, ssh) =>
-            callback.call @, ssh, next
+            # callback.call @, ssh, next
+            callback.call @, ssh, (err) ->
+              ssh.end()
+              ssh.on 'end', ->
+                next err
       if mode
         switch mode
           when 'local'
@@ -44,7 +52,11 @@ running both locally and remotely
       remote = ->
         it.skip "#{msg} (remote)", (next) ->
           connect host: 'localhost', (err, ssh) =>
-            callback.call @, ssh, next
+            # callback.call @, ssh, next
+            callback.call @, ssh, (err) ->
+              ssh.end()
+              ssh.on 'end', ->
+                next err
       if mode
         switch mode
           when 'local'
