@@ -21,5 +21,7 @@
     "coffee-script": "^1.8.0"
   },
   "optionalDependencies": {},
-  "scripts": {}
+  "scripts": {
+    "coffee": "./node_modules/.bin/coffee -b -o lib src"
+  }
 }
