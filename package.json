@@ -18,7 +18,7 @@
     "ssh2-connect": "^0.0.6"
   },
   "devDependencies": {
-    "coffee-script": "^1.8.0"
+    "coffee-script": "^1.9.1"
   },
   "optionalDependencies": {},
   "scripts": {
