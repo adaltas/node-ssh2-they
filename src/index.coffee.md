@@ -11,7 +11,9 @@ running both locally and remotely
         connect host: 'localhost', (err, ssh) =>
           return next err if err
           callback.call @, ssh, (err) ->
-            return next() if ssh._state is 'closed'
+            open = ssh._sshstream?.writable and ssh._sock?.writable
+            return next() unless open
+            # return next() if ssh._state is 'closed'
             ssh.end()
             ssh.on 'end', ->
               next err
@@ -27,7 +29,9 @@ running both locally and remotely
         it.only "#{msg} (remote)", (next) ->
           connect host: 'localhost', (err, ssh) =>
             callback.call @, ssh, (err) ->
-              return next() if ssh._state is 'closed'
+              open = ssh._sshstream?.writable and ssh._sock?.writable
+              return next() unless open
+              # return next() if ssh._state is 'closed'
               ssh.end()
               ssh.on 'end', ->
                 next err
