@@ -16,7 +16,7 @@ running both locally and remotely
             # return next() if ssh._state is 'closed'
             ssh.end()
             ssh.on 'end', ->
-              next err
+              process.nextTick -> next err
     they.only = (mode, msg, callback) ->
       if arguments.length is 2
         callback = msg
