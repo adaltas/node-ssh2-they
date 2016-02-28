@@ -16,7 +16,7 @@
     "url": "git://github.com/wdavidw/node-ssh2-they.git"
   },
   "dependencies": {
-    "ssh2-connect": "^0.0.6"
+    "ssh2-connect": "^0.0.7"
   },
   "devDependencies": {
     "coffee-script": "^1.9.1"
