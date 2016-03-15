@@ -1,6 +1,6 @@
 {
   "name": "ssh2-they",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "Extends Mocha with the function `they` to transparently run tests in local and ssh mode",
   "keywords": ["ssh", "ssh2", "sftp", "secure", "test", "mocha"],
   "homepage": "https://github.com/wdavidw/node-ssh2-they",
@@ -16,7 +16,7 @@
     "url": "git://github.com/wdavidw/node-ssh2-they.git"
   },
   "dependencies": {
-    "ssh2-connect": "^0.0.7"
+    "ssh2-connect": "^1.0.0"
   },
   "devDependencies": {
     "coffee-script": "^1.9.1"
