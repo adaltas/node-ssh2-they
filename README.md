@@ -52,9 +52,8 @@ Contributors
 
 *   David Worms: <https://github.com/wdavidw>
 
-[fs]: https://github.com/wdavidw/node-ssh2-fs
-[exists]: https://github.com/wdavidw/node-ssh2-fs/blob/master/test/exists.coffee
+[fs]: https://github.com/adaltas/node-ssh2-fs
+[exists]: https://github.com/adaltas/node-ssh2-fs/blob/master/test/exists.coffee
 [ssh2]: https://github.com/mscdex/ssh2
-[license]: https://github.com/wdavidw/node-ssh2-fs/blob/master/LICENSE.md
+[license]: https://github.com/adaltas/node-ssh2-they/blob/master/LICENSE.md
 [travis]: https://travis-ci.org/
-
