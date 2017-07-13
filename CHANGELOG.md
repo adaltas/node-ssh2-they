@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Version 1.0.4
+
+* src: handle non promise return in promise remote
+
 ## Version 1.0.3
 
 * mocha: fix regression by passing context

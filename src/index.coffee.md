@@ -16,12 +16,20 @@ running both locally and remotely
             ssh.end()
             ssh.on 'end', ->
               process.nextTick -> callback()
-          return next err if err
-          p = callback.call context, ssh, (err) ->
-          p.then ->
-            close -> resolve()
-          , (err) ->
-            close -> reject err
+          return reject err if err
+          try
+            p = callback.call context, ssh, (err) ->
+          catch err
+            # Sync through throw error
+            reject err
+          # Async through promise
+          if p
+            p.then ->
+              close -> resolve()
+            , (err) ->
+              close -> reject err
+          # Sync through return
+          else close -> resolve()
     
     callback_local = (context, callback, next) ->
       callback.call context, null, next
