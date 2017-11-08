@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* package: upgrade to CoffeeScript 2
+
 ## Version 1.0.4
 
 * src: handle non promise return in promise remote
