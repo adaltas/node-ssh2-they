@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* package: npm release commands
 * package: latest depedencies
 * package: upgrade to CoffeeScript 2
 
