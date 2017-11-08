@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* package: latest depedencies
 * package: upgrade to CoffeeScript 2
 
 ## Version 1.0.4
