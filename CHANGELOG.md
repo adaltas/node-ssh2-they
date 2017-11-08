@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 1.2.0
 
 * package: npm release commands
 * package: latest depedencies
