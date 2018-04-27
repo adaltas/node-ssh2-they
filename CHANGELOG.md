@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* dependencies: ssh2-connect version 2.0.2
+
 ## Version 1.2.0
 
 * package: npm release commands
