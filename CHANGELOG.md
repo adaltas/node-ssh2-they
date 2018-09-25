@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 1.3.0
 
 * configure: new function to handle user configuration
 
