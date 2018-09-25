@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* configure: new function to handle user configuration
+
 ## Version 1.2.1
 
 * dependencies: ssh2-connect version 2.0.2
