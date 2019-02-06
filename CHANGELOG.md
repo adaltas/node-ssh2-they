@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* project: latest dependencies
 * project: ignore yarn lock and log files
 
 ## Version 1.3.0
