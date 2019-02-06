@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* project: ignore yarn lock and log files
+
 ## Version 1.3.0
 
 * configure: new function to handle user configuration
