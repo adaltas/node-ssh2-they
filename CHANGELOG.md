@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 1.3.1
 
 * project: latest dependencies
 * project: ignore yarn lock and log files
