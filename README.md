@@ -1,19 +1,17 @@
 
-Node.js ssh2-they
-=================
+# Node.js ssh2-they
 
 Extends [Mocha][mocha] with a new `they` function replacing `it`. The goal is 
-to execute tests twice on ssh and non-ssh environments. This package was originally 
-written to test the "ssh2-fs", "ssh2-exec" and "nikita". All the tests in 
-those modules work on a local environment or over SSH transparently.
+to execute the same test in multiple environments. This package was originally 
+written to test [ssh2-fs](https://github.com/adaltas/node-ssh2-fs), [ssh2-exec](https://github.com/adaltas/node-ssh2-exec) and [Nikita](http://nikita.js.org/). For example, in 
+those packages, each test is run twice: the first time on a local environment and the second time over SSH.
 
-The main module of this package doesn't take any option and will attempt to open a passwordless ssh connection on localhost with the current running user. Thus, it expects 
+If no environnement is provided, the default behavior of this package is to attempt to open a passwordless ssh connection on localhost with the current running user. Thus, it expects 
 correct deployment of your ssh public key inside your own authorized_key file.
 
-Additionally, you can call the `configure` function which expect an SSH configuration. Refer to the ["ssh2-connect"](https://github.com/adaltas/node-ssh2-connect) and ["ssh2"](https://github.com/mscdex/ssh2) packages for a complete list of supported options.
+Additionally, you can call the `configure` function with multiple environment parameters. Refer to the ["ssh2-connect"](https://github.com/adaltas/node-ssh2-connect) and ["ssh2"](https://github.com/mscdex/ssh2) packages for a complete list of supported options.
 
-Installation
-------------
+## Installation
 
 This is OSS and licensed under the [new BSD license][license].
 
