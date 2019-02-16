@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* api: handle multiple environments
 * project: MIT license
 * project: remove package lock
 

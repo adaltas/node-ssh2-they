@@ -4,7 +4,11 @@ running both locally and remotely
 
     connect = require 'ssh2-connect'
 
-    configure = (config={}) ->
+    configure = (configs...) ->
+      for config, i in configs
+        configs[i] = config = {} unless config?
+        configs[i].name ?= "#{i}.#{unless config.host then 'local' else 'remote'}"
+        configs[i].ssh = !!config.host
       # Local execution for promises
       promise_local = (context, callback) ->
         callback.call context, null
@@ -51,30 +55,41 @@ running both locally and remotely
       # Define our main entry point
       they = (msg, callback) ->
         if callback.length is 1
-          it "#{msg} (local)", ->
-            promise_local @, callback
-          it "#{msg} (remote)", -> promise_remote @, callback
+          for config, i in configs
+            unless config.ssh
+            then it "#{msg} (#{config.name})", -> promise_local @, callback
+            else it "#{msg} (#{config.name})", -> promise_remote @, callback
         else
-          it "#{msg} (local)", (next) -> callback_local @, callback, next
-          it "#{msg} (remote)", (next) -> callback_remote @, callback, next
+          for config, i in configs
+            unless config.ssh
+            then it "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
+            else it "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
       they.only = (msg, callback) ->
         if callback.length is 1
-          it.only "#{msg} (local)", -> promise_local @, callback
-          it.only "#{msg} (remote)", -> promise_remote @, callback
+          for config, i in configs
+            unless config.ssh
+            then it.only "#{msg} (#{config.name})", -> promise_local @, callback
+            else it.only "#{msg} (#{config.name})", -> promise_remote @, callback
         else
-          it.only "#{msg} (local)", (next) -> callback_local @, callback, next
-          it.only "#{msg} (remote)", (next) -> callback_remote @, callback, next
+          for config, i in configs
+            unless config.ssh
+            then it.only "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
+            else it.only "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
       they.skip = (msg, callback) ->
         if callback.length is 1
-          it.skip "#{msg} (local)", -> promise_local @, callback
-          it.skip "#{msg} (remote)", -> promise_remote @, callback
+          for config, i in configs
+            unless config.ssh
+            then it.skip "#{msg} (#{config.name})", -> promise_local @, callback
+            else it.skip "#{msg} (#{config.name})", -> promise_remote @, callback
         else
-          it.skip "#{msg} (local)", (next) -> callback_local @, callback, next
-          it.skip "#{msg} (remote)", (next) -> callback_remote @, callback, next
+          for config, i in configs
+            unless config.ssh
+            then it.skip "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
+            else it.skip "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
       # Return the final result
       they
         
     module.exports = configure()
     
-    module.exports.configure = (config) ->
-      configure config
+    module.exports.configure = (configs...) ->
+      configure configs...
