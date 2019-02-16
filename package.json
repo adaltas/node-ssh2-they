@@ -11,7 +11,7 @@
     "mocha"
   ],
   "homepage": "https://github.com/adaltas/node-ssh2-they",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "author": "David Worms <david@adaltas.com>",
   "contributors": [],
   "engines": {

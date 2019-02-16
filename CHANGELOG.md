@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* project: MIT license
 * project: remove package lock
 
 ## Version 1.3.1
