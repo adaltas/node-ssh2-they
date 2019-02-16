@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 2.0.0
 
 * api: handle multiple environments
 * project: MIT license
