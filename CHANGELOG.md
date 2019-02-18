@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 2.0.2
 
 * config: clone properties
 * ssh: isolate in its own property
