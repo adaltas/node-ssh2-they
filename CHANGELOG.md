@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* readme: typos
+
 ## Version 2.0.2
 
 * config: clone properties
