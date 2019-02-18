@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* project: remove console.log
+
 ## Version 2.0.0
 
 * api: handle multiple environments
