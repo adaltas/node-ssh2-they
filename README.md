@@ -31,7 +31,7 @@ const fs = require('ssh2-fs')
 const they = require('ssh2-they')
 
 describe('exists', function(){
-  they('on file', function(ssh, next){
+  they('on file', function({ssh}, next){
     fs.exists( ssh, "#{__filename}", function(err, exists){
       exists.should.be.true()
       next()
@@ -47,14 +47,16 @@ This test will attempt a remote connection using the root user:
 const should = require('should')
 const fs = require('ssh2-fs')
 const they = require('ssh2-they').configure({
-  host: 'localhost',
-  port: 22,
-  username: 'root',
-  privateKey: require('fs').readFileSync('/here/is/my/key')
+  debug: true,
+  ssh:
+    host: 'localhost',
+    port: 22,
+    username: 'root',
+    privateKey: require('fs').readFileSync('/here/is/my/key')
 })
 
 describe('exists', function(){
-  they('on file', function(ssh, next){
+  they('on file', function({debug, ssh}, next){
     fs.exists( ssh, "#{__filename}", function(err, exists){
       exists.should.be.true()
       next()

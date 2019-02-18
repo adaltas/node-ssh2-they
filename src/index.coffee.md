@@ -7,16 +7,16 @@ running both locally and remotely
     configure = (configs...) ->
       for config, i in configs
         configs[i] = config = {} unless config?
-        configs[i].name ?= "#{i}.#{unless config.host then 'local' else 'remote'}"
-        configs[i].ssh = !!config.host
+        configs[i].name ?= "#{i}.#{unless config.ssh?.host then 'local' else 'remote'}"
+        if config.ssh is true
+          configs[i].ssh = host: 'localhost', port: 22
       # Local execution for promises
-      promise_local = (context, callback) ->
-        callback.call context, null
+      promise_local = (context, config, handler) ->
+        handler.call context, config
       # Remote execution for promises
-      promise_remote = (context, callback) ->
+      promise_remote = (context, config, handler) ->
         new Promise (resolve, reject) ->
-          config.host ?= 'localhost'
-          connect config, (err, ssh) ->
+          connect config.ssh, (err, ssh) ->
             close = (callback) ->
               open = ssh._sshstream?.writable and ssh._sock?.writable
               return callback() unless open
@@ -25,7 +25,8 @@ running both locally and remotely
                 process.nextTick -> callback()
             return reject err if err
             try
-              p = callback.call context, ssh, (err) ->
+              config.ssh = ssh
+              p = handler.call context, config, (err) ->
             catch err
               # Sync through throw error
               reject err
@@ -38,54 +39,54 @@ running both locally and remotely
             # Sync through return
             else close -> resolve()
       # Local execution for callbacks
-      callback_local = (context, callback, next) ->
-        callback.call context, null, next
+      callback_local = (context, config, handler, next) ->
+        handler.call context, config, next
         return null
       # Remote execution for callbacks
-      callback_remote = (context, callback, next) ->
-        config.host ?= 'localhost'
-        connect config, (err, ssh) ->
+      callback_remote = (context, config, handler, next) ->
+        connect config.ssh, (err, ssh) ->
           return next err if err
-          callback.call context, ssh, (err) ->
+          config.ssh = ssh
+          handler.call context, config, (err) ->
             open = ssh._sshstream?.writable and ssh._sock?.writable
             return next() unless open
             ssh.end()
             ssh.on 'end', ->
               process.nextTick -> next err
       # Define our main entry point
-      they = (msg, callback) ->
-        if callback.length is 1
-          for config, i in configs
+      they = (msg, handler) ->
+        if handler.length is 1
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it "#{msg} (#{config.name})", -> promise_local @, callback
-            else it "#{msg} (#{config.name})", -> promise_remote @, callback
+            then it "#{msg} (#{config.name})", -> promise_local @, config, handler
+            else it "#{msg} (#{config.name})", -> promise_remote @, config, handler
         else
-          for config, i in configs
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
-            else it "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
-      they.only = (msg, callback) ->
-        if callback.length is 1
-          for config, i in configs
+            then it "#{msg} (#{config.name})", (next) -> callback_local @, config, handler, next
+            else it "#{msg} (#{config.name})", (next) -> callback_remote @, config, handler, next
+      they.only = (msg, handler) ->
+        if handler.length is 1
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it.only "#{msg} (#{config.name})", -> promise_local @, callback
-            else it.only "#{msg} (#{config.name})", -> promise_remote @, callback
+            then it.only "#{msg} (#{config.name})", -> promise_local @, config, handler
+            else it.only "#{msg} (#{config.name})", -> promise_remote @, config, handler
         else
-          for config, i in configs
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it.only "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
-            else it.only "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
-      they.skip = (msg, callback) ->
-        if callback.length is 1
-          for config, i in configs
+            then it.only "#{msg} (#{config.name})", (next) -> callback_local @, config, handler, next
+            else it.only "#{msg} (#{config.name})", (next) -> callback_remote @, config, handler, next
+      they.skip = (msg, handler) ->
+        if handler.length is 1
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it.skip "#{msg} (#{config.name})", -> promise_local @, callback
-            else it.skip "#{msg} (#{config.name})", -> promise_remote @, callback
+            then it.skip "#{msg} (#{config.name})", -> promise_local @, config, handler
+            else it.skip "#{msg} (#{config.name})", -> promise_remote @, config, handler
         else
-          for config, i in configs
+          for config, i in configs then do (config, i) ->
             unless config.ssh
-            then it.skip "#{msg} (#{config.name})", (next) -> callback_local @, callback, next
-            else it.skip "#{msg} (#{config.name})", (next) -> callback_remote @, callback, next
+            then it.skip "#{msg} (#{config.name})", (next) -> callback_local @, config, handler, next
+            else it.skip "#{msg} (#{config.name})", (next) -> callback_remote @, config, handler, next
       # Return the final result
       they
         

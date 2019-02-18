@@ -1,6 +1,11 @@
 
 # Changelog
 
+## Trunk
+
+* ssh: isolate in its own property
+* api: dissociate ssh from environments
+
 ## Version 2.0.1
 
 * project: remove console.log
