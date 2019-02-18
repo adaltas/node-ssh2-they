@@ -12,7 +12,7 @@ running both locally and remotely
           configs[i].ssh = host: 'localhost', port: 22
       # Local execution for promises
       promise_local = (context, config, handler) ->
-        handler.call context, config
+        handler.call context, {...config}
       # Remote execution for promises
       promise_remote = (context, config, handler) ->
         new Promise (resolve, reject) ->
@@ -25,8 +25,7 @@ running both locally and remotely
                 process.nextTick -> callback()
             return reject err if err
             try
-              config.ssh = ssh
-              p = handler.call context, config, (err) ->
+              p = handler.call context, {...config, ssh: ssh}, (err) ->
             catch err
               # Sync through throw error
               reject err
@@ -40,14 +39,13 @@ running both locally and remotely
             else close -> resolve()
       # Local execution for callbacks
       callback_local = (context, config, handler, next) ->
-        handler.call context, config, next
+        handler.call context, {...config}, next
         return null
       # Remote execution for callbacks
       callback_remote = (context, config, handler, next) ->
         connect config.ssh, (err, ssh) ->
           return next err if err
-          config.ssh = ssh
-          handler.call context, config, (err) ->
+          handler.call context, {...config, ssh: ssh}, (err) ->
             open = ssh._sshstream?.writable and ssh._sock?.writable
             return next() unless open
             ssh.end()

@@ -3,6 +3,7 @@
 
 ## Trunk
 
+* config: clone properties
 * ssh: isolate in its own property
 * api: dissociate ssh from environments
 
