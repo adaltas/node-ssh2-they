@@ -1,6 +1,6 @@
 {
   "name": "ssh2-they",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Extends Mocha with the function `they` to transparently run tests in local and ssh mode",
   "keywords": [
     "ssh",
