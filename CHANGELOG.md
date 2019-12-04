@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* package: update adaltas url
+
 ## Version 2.0.3
 
 * readme: typos
