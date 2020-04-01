@@ -3,8 +3,18 @@ Extends mocha with a function similar to `it` but
 running both locally and remotely
 
     connect = require 'ssh2-connect'
+    
+    flatten =  (arr) ->
+      ret = []
+      for i in [0 ... arr.length]
+        if Array.isArray arr[i]
+          ret.push flatten(arr[i])...
+        else
+          ret.push arr[i]
+      ret
 
     configure = (configs...) ->
+      configs = flatten configs
       for config, i in configs
         configs[i] = config = {} unless config?
         configs[i].name ?= "#{i}.#{unless config.ssh?.host then 'local' else 'remote'}"
