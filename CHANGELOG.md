@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 2.1.0
 
 * promise: fix support for returned objects
 * configure: support arrays and splats
