@@ -31,6 +31,16 @@
     "node": ">=0.10.1"
   },
   "main": "./lib/index",
+  "mocha": {
+    "throw-deprecation": true,
+    "require": [
+      "should",
+      "coffeescript/register"
+    ],
+    "timeout": 40000,
+    "reporter": "spec",
+    "recursive": true
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/adaltas/node-ssh2-they.git"
@@ -39,7 +49,9 @@
     "ssh2-connect": "^2.0.5"
   },
   "devDependencies": {
-    "coffeescript": "^2.3.2"
+    "coffeescript": "^2.3.2",
+    "mocha": "^7.1.1",
+    "should": "^13.2.3"
   },
   "optionalDependencies": {},
   "scripts": {
@@ -49,6 +61,8 @@
     "patch": "npm version patch -m 'Bump to version %s'",
     "minor": "npm version minor -m 'Bump to version %s'",
     "major": "npm version major -m 'Bump to version %s'",
-    "build": "coffee -b -o lib src"
+    "build": "coffee -b -o lib src",
+    "pretest": "npm run build",
+    "test": "mocha 'test/**/*.coffee'"
   }
 }
