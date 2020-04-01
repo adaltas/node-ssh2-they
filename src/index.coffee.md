@@ -40,7 +40,7 @@ running both locally and remotely
               # Sync through throw error
               reject err
             # Async through promise
-            if p
+            if p and p.then
               p.then ->
                 close -> resolve()
               , (err) ->

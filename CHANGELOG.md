@@ -1,6 +1,9 @@
 
 # Changelog
 
+## Trunk
+
+* promise: fix support for returned objects
 * configure: support arrays and splats
 * package: rename coffee command to build
 * package: add coffee lint
