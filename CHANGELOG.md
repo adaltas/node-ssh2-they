@@ -1,6 +1,9 @@
 
 # Changelog
 
+* package: rename coffee command to build
+* package: add coffee lint
+
 ## Version 2.0.4
 
 * package: update adaltas url
