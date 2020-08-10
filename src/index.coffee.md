@@ -25,28 +25,20 @@ running both locally and remotely
         handler.call context, {...config}
       # Remote execution for promises
       promise_remote = (context, config, handler) ->
-        new Promise (resolve, reject) ->
-          connect config.ssh, (err, ssh) ->
-            close = (callback) ->
-              open = ssh._sshstream?.writable and ssh._sock?.writable
-              return callback() unless open
-              ssh.end()
-              ssh.on 'end', ->
-                process.nextTick -> callback()
-            return reject err if err
-            try
-              p = handler.call context, {...config, ssh: ssh}, (err) ->
-            catch err
-              # Sync through throw error
-              reject err
-            # Async through promise
-            if p and p.then
-              p.then ->
-                close -> resolve()
-              , (err) ->
-                close -> reject err
-            # Sync through return
-            else close -> resolve()
+        ssh = await connect config.ssh
+        close = ->
+          new Promise (resolve) ->
+            opened = ssh._sshstream?.writable and ssh._sock?.writable
+            return resolve() unless opened
+            ssh.end()
+            ssh.on 'end', ->
+              process.nextTick -> resolve()
+        try
+          await handler.call context, {...config, ssh: ssh}
+          close()
+        catch err
+          await close()
+          throw err
       # Local execution for callbacks
       callback_local = (context, config, handler, next) ->
         handler.call context, {...config}, next

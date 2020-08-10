@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* package: use ssh2-connect async API
+
 ## Version 2.1.0
 
 * promise: fix support for returned objects
