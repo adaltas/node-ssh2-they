@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 2.2.0
 
 * package: use ssh2-connect async API
 
