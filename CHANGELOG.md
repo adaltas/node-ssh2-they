@@ -1,6 +1,10 @@
 
 # Changelog
 
+## Trunk
+
+* feat: re-introduce callback support
+
 ## Version 2.2.0
 
 * package: use ssh2-connect async API

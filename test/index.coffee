@@ -12,3 +12,10 @@ describe 'they', ->
 
   they 'return `Promise.resolve`', (ssh) ->
     new Promise (resolve) -> setImmediate resolve
+
+  they 'call next synchronously', (ssh, next) ->
+    next()
+
+  they 'call next asynchronously', (ssh, next) ->
+    setImmediate ->
+      next()

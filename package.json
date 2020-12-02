@@ -46,11 +46,11 @@
     "url": "git://github.com/adaltas/node-ssh2-they.git"
   },
   "dependencies": {
-    "ssh2-connect": "^3.0.0"
+    "ssh2-connect": "^3.1.0"
   },
   "devDependencies": {
     "coffeescript": "^2.5.1",
-    "mocha": "^8.1.1",
+    "mocha": "^8.2.1",
     "should": "^13.2.3"
   },
   "optionalDependencies": {},

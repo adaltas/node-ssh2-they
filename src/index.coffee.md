@@ -53,6 +53,7 @@ running both locally and remotely
             ssh.end()
             ssh.on 'end', ->
               process.nextTick -> next err
+        null
       # Define our main entry point
       they = (msg, handler) ->
         if handler.length is 1
