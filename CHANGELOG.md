@@ -1,7 +1,7 @@
 
 # Changelog
 
-## Trunk
+## Version 2.2.1
 
 * feat: re-introduce callback support
 
